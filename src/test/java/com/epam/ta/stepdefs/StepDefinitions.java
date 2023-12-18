@@ -1,6 +1,7 @@
 package com.epam.ta.stepdefs;
 
 import com.epam.ta.helper.WebDriverFactory;
+import org.openqa.selenium.JavascriptExecutor;
 import com.epam.ta.pageobjects.CommunitiesPage;
 import com.epam.ta.pageobjects.MainPage;
 import com.epam.ta.pageobjects.VideosPage;
@@ -14,6 +15,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.time.Duration;
 
@@ -100,7 +102,9 @@ public class StepDefinitions {
     @Then("I see {int} videocards")
     public void iSeeNumberOfVideosCards(int expectedCardCount) {
         var driver = webDriverFactory.getDriver();
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         System.out.println("Előtte: " + videosPage.getEventCards().size());
+        jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight);");
         FluentWait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(20))
                 .pollingEvery(Duration.ofSeconds(1))
