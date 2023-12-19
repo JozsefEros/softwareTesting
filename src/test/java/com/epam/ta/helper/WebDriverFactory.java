@@ -5,6 +5,8 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +18,7 @@ public class WebDriverFactory {
     public static final Dimension BROWSER_SCREEN_SIZE = new Dimension(1920, 1080);
     @Value("${headless:false}")
     private Boolean headless;
-    @Value("${browser:chrome}")
+    @Value("${browser:edge}")
     private String browserName;
 
     private WebDriver webDriver;
@@ -39,6 +41,11 @@ public class WebDriverFactory {
             case "firefox" -> {
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver(new FirefoxOptions().setHeadless(headless));
+            }
+            case "edge" -> {
+                WebDriverManager.edgedriver().setup();
+                driver = new EdgeDriver(
+                        new EdgeOptions().setHeadless(headless).addArguments("--remote-allow-origins=*"));
             }
             default -> throw new RuntimeException(browserName + " is not a supported browser");
         }

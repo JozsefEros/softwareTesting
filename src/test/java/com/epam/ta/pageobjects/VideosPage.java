@@ -12,14 +12,23 @@ import java.util.List;
 @Component
 public class VideosPage {
 
-    // @FindBy(css = ".evnt-search-filter .evnt-text-fields.evnt-search")
+
     @FindBy(css = ".evnt-search-filter .evnt-text-fields.evnt-search")
-    // evnt-text-fields form-control evnt-search - Misi küldte
     private WebElement searchField;
 
     @FindBy(css = ".evnt-talk-card")
     private List<WebElement> eventCards;
 
+    @FindBy(id = "filter_tag")
+    private WebElement filterTag;
+/*
+    @FindBy(css = ".evnt-dropdown-filter dropdown")
+    private WebElement filterDropdown;
+
+    @FindBy(css = ".evnt-dropdown-filter dropdown .show")
+    private WebElement filterDropdownShow;
+
+ */
     private final WebDriver webDriver;
 
     public VideosPage(WebDriverFactory factory) {
@@ -29,9 +38,18 @@ public class VideosPage {
 
     public void searchFor(String text) {
         searchField.sendKeys(text);
+
     }
 
     public List<WebElement> getEventCards() {
         return eventCards;
+    }
+
+    public void clickFilterTag(){
+        filterTag.click();
+    }
+
+    public boolean checkFilterPanelIsOpened(){
+        return filterTag.getAttribute("aria-expanded").equalsIgnoreCase("true");
     }
 }

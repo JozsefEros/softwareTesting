@@ -1,7 +1,7 @@
 package com.epam.ta.stepdefs;
 
 import com.epam.ta.helper.WebDriverFactory;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.*;
 import com.epam.ta.pageobjects.CommunitiesPage;
 import com.epam.ta.pageobjects.MainPage;
 import com.epam.ta.pageobjects.VideosPage;
@@ -10,16 +10,16 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class StepDefinitions {
 
@@ -120,5 +120,18 @@ public class StepDefinitions {
                     videosPage.getEventCards().size());
             System.out.println("Catch ágban: " + videosPage.getEventCards().size());
         }
+    }
+
+    @When("I click tag_filter dropdown")
+    public void iClickTagFilterDropdown() throws InterruptedException {
+        var driver = webDriverFactory.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("filter_tag")));
+        element.click();
+        // videosPage.clickFilterTag();
+    }
+    @Then("The filter panel is opened")
+    public void checkFilterPanelIsOpened(){
+        assertTrue(videosPage.checkFilterPanelIsOpened());
     }
 }

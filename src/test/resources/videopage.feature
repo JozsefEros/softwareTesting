@@ -4,7 +4,12 @@ Feature: Video page content
     Given the 'Videos' page is opened
     When I type '<input>' into the videosearch field
     Then I see <numberOfVideoCards> videocards
+
     Examples:
       | input       | numberOfVideoCards |
       | Unix        | 4             |
       | Android     | 14            |
+
+  Scenario:
+    When I click tag_filter dropdown
+    Then The filter panel is opened
