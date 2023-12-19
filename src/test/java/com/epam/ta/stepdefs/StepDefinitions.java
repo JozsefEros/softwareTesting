@@ -126,12 +126,12 @@ public class StepDefinitions {
     public void iClickTagFilterDropdown() throws InterruptedException {
         var driver = webDriverFactory.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("filter_tag")));
-        element.click();
-        // videosPage.clickFilterTag();
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("filter_tag")));
+        //Thread.sleep(60000);
+        videosPage.clickFilterTag();
     }
     @Then("The filter panel is opened")
-    public void checkFilterPanelIsOpened(){
+    public void filterPanelIsOpened(){
         assertTrue(videosPage.checkFilterPanelIsOpened());
     }
 }

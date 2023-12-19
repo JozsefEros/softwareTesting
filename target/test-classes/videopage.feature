@@ -11,5 +11,6 @@ Feature: Video page content
       | Android     | 14            |
 
   Scenario:
+    Given the 'Videos' page is opened
     When I click tag_filter dropdown
     Then The filter panel is opened
