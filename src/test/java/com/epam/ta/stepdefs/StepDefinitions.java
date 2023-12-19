@@ -134,4 +134,16 @@ public class StepDefinitions {
     public void filterPanelIsOpened(){
         assertTrue(videosPage.checkFilterPanelIsOpened());
     }
+    @When("I click language_filter dropdown")
+    public void iClickLanguageFilterDropdown() throws InterruptedException {
+        var driver = webDriverFactory.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("filter_tag")));
+        //Thread.sleep(60000);
+        videosPage.clickFilterLanguage();
+    }
+    @Then("The language filter panel is opened")
+    public void filterLanguagePanelIsOpened(){
+        assertTrue(videosPage.checkLanguageFilterPanelIsOpened());
+    }
 }

@@ -22,14 +22,10 @@ public class VideosPage {
 
     @FindBy(id = "filter_tag")
     private WebElement filterTag;
-/*
-    @FindBy(css = ".evnt-dropdown-filter dropdown")
-    private WebElement filterDropdown;
 
-    @FindBy(css = ".evnt-dropdown-filter dropdown .show")
-    private WebElement filterDropdownShow;
+    @FindBy(id = "filter_language")
+    private WebElement filterLanguage;
 
- */
     private final WebDriver webDriver;
 
     public VideosPage(WebDriverFactory factory) {
@@ -52,5 +48,12 @@ public class VideosPage {
 
     public boolean checkFilterPanelIsOpened(){
         return filterTag.getAttribute("aria-expanded").equalsIgnoreCase("true");
+    }
+    public void clickFilterLanguage(){
+        filterLanguage.click();
+    }
+
+    public boolean checkLanguageFilterPanelIsOpened(){
+        return filterLanguage.getAttribute("aria-expanded").equalsIgnoreCase("true");
     }
 }

@@ -14,3 +14,5 @@ Feature: Video page content
     Given the 'Videos' page is opened
     When I click tag_filter dropdown
     Then The filter panel is opened
+    When I click language_filter dropdown
+    Then The language filter panel is opened
